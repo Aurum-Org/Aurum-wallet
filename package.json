@@ -22,17 +22,32 @@
     "test:frontend": "npm run test --workspace=frontend",
     "test:backend": "npm run test --workspace=backend",
     "test:contract": "npm run test --workspace=contract",
-    "lint": "npm-run-all --parallel lint:*",
+    "lint": "eslint ./frontend --ext .js,.jsx,.ts,.tsx",
     "lint:frontend": "npm run lint --workspace=frontend",
     "lint:backend": "npm run lint --workspace=backend",
-    "lint:contract": "npm run lint --workspace=contract"
+    "lint:contract": "npm run lint --workspace=contract",
+    "lint:fix": "eslint ./frontend --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write \"frontend/**/*.{js,jsx,ts,tsx,json}\""
   },
   "devDependencies": {
-    "npm-run-all": "^4.1.5"
+    "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.23.0",
+    "@typescript-eslint/eslint-plugin": "^8.27.0",
+    "@typescript-eslint/parser": "^8.27.0",
+    "eslint": "^9.23.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-native": "^5.0.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.5.3",
+    "typescript-eslint": "^8.27.0"
   },
   "engines": {
     "node": ">=18.0.0"
   },
   "author": "",
-  "license": "MIT"
-} 
+  "license": "MIT",
+  "type": "module"
+}
