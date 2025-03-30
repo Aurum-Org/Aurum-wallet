@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
+import { useUserStore, useWalletStore } from '@/store';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -27,6 +28,16 @@ export default function RootLayout() {
     ...FontAwesome.font,
   });
 
+
+
+  // Initialize Zustand stores
+  const initializeStores = async () => {
+    // The stores will automatically hydrate from AsyncStorage
+    // This is just to ensure they're initialized
+    useUserStore.getState()
+    useWalletStore.getState()
+  }
+
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
     if (error) throw error;
@@ -34,7 +45,9 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loaded) {
-      SplashScreen.hideAsync();
+     initializeStores().finally(() => {
+        SplashScreen.hideAsync()
+      })
     }
   }, [loaded]);
 
